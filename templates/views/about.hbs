@@ -3,11 +3,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>About page</title>
+    <link rel="icon" href="/images/weather.png">
     <link rel="stylesheet" href="/css/styles.css" />
   </head>
   <body>
-    {{>header}}
-    <img src="/images/robot.jpg" alt="Robot image here" />
-  {{>footer}}
+       <div class="main-content">
+            {{>header}}
+            <img class="portrait" src="/images/robot.jpg" 
+                  alt="Robot image here" />
+       </div>
+       {{>footer}}
   </body>
 </html>
