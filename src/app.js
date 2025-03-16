@@ -3,21 +3,23 @@ const path = require("path");
 const express = require("express");
 const app = express();
 const hbs = require("hbs");
+const forecast = require("./utils/forecast.js");
+const geoCode = require("./utils/geocode.js");
 
 //  Define paths
-const publicDirectory = path.join(__dirname, "../public");
-const viewsDirectory = path.join(__dirname, "../templates/views");
-const partialsDirectory = path.join(__dirname, "../templates/partials");
+const publicPath = path.join(__dirname, "../public");
+const viewsPath = path.join(__dirname, "../templates/views");
+const partialsPath = path.join(__dirname, "../templates/partials");
 
 // exposing public folder  for the client
-app.use(express.static(publicDirectory));
+app.use(express.static(publicPath)); // Middleware design.
 
 //Set up handlebars engine and view location
+app.set("views", viewsPath);
 app.set("view engine", "hbs");
-app.set("views", viewsDirectory);
-hbs.registerPartials(partialsDirectory);
+hbs.registerPartials(partialsPath);
 
-// Routes
+// Routers
 app.get("/", (req, res) => {
   res.render("index", {
     title: "Weather",
@@ -46,16 +48,49 @@ app.get("/about", (req, res) => {
 });
 
 app.get("/weather", (req, res) => {
-  res.send({
-    forecast: "it is gonna rain today",
-    location: "it is gonna show a locaion",
+  const address = req.query.address;
+  if (!address) {
+    return res.send("Please provide an address");
+  }
+
+  geoCode(address, (error, { lat, long, location } = {}) => {
+    if (error) {
+      res.send({ error });
+    } else {
+      forecast(lat, long, (forecastError, forecastData) => {
+        if (forecastError) {
+          res.send({
+            error: forecastError,
+          });
+        } else {
+          res.send({
+            forecast: forecastData,
+            location,
+            address,
+          });
+        }
+      });
+    }
   });
 });
+app.get("/products", (req, res) => {
+  if (!req.query.search) {
+    return res.send({
+      error: "You must provide a search term",
+    });
+  }
+
+  console.log(req.query.search);
+  res.send({
+    products: [],
+  });
+});
+
 app.get("/help/*", (req, res) => {
   res.render("404", {
     title: "404",
     myName: "Daniel",
-    errorMessage: "Help article not found",
+    errorMessage: "Help not found",
   });
 });
 

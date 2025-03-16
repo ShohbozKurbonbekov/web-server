@@ -33,4 +33,4 @@
 // Partials allow you create a little template which is part of a bigger webpage. So we need to think about the parts of the webpage that we are gonna end  up reusing multiple pages in our site. these things would be "header" or "footer". with partials, it is gonna be so easy to create header and reuse it without needing to copy markup between all the pages in our site.  for that they are some steps to do.
 //1️⃣ - load and configure "hbs" for the first time. and create a partials "folder" inside  "template" folder
 //2️⃣ - then  we can tell "hbs" that we put our partials in this partials directory, and then we can actually add some stuff inside of there.
-//3️⃣ - we should customize our nodemon command, we can have nodemon restart when our js files change and when hbs change, like "nodemon src/app.js -e js,hbs"
+//3️⃣ - we should customize our nodemon command, we can have no demon restart when our js files change and when hbs change, like "nodemon src/app.js -e js,hbs"
