@@ -1,4 +1,3 @@
-console.log("js is running in the browser");
 const form = document.querySelector("form");
 const input = document.querySelector("#inputField");
 const weatherLists = document.querySelector("#weather__lists");
@@ -25,28 +24,46 @@ const clearInput = () => {
 };
 const showError = (error) => {
   weatherLists.innerHTML = "";
-  weatherLists.insertAdjacentHTML("beforeend", error);
+  const errorMsg = `<h5 class="alert alert-danger">${error}</h5>`;
+  weatherLists.insertAdjacentHTML("beforeend", errorMsg);
+};
+
+const showLoadingStatus = () => {
+  weatherLists.innerHTML = "";
+  const html = `<button class="btn btn-secondary text-white" type="button" disabled>
+  <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+  <span role="status">Loading...</span>
+</button>`;
+
+  weatherLists.insertAdjacentHTML("beforeend", html);
 };
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
-  const inputValue = input.value.trim();
 
+  // fetching input from the field
+  const inputValue = input.value.trim();
   if (!inputValue) {
     return alert("Please give a try to give an input into the filed");
   }
+
+  // Show loadig message
+  showLoadingStatus();
 
   // fetching data
   fetch(`http://localhost:3000/weather?address=${inputValue}`)
     .then((response) => response.json())
     .then((data) => {
+      //Show error mesage
       if (data.error) {
         showError(data.error);
       } else {
+        // Showing success message
         weatherLists.innerHTML = "";
         createInfo(data);
       }
     });
+
   // clean Input
   clearInput();
 });
