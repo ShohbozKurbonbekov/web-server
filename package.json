@@ -4,7 +4,7 @@
   "description": "this is a mini-fullstack weather website",
   "main": "app.js",
   "scripts": {
-    "start:dev": "nodemon src/app.js",
+    "start:dev": "nodemon src/app.js -e js,hbs",
     "start:train": "nodemon train.js"
   },
   "keywords": [],
