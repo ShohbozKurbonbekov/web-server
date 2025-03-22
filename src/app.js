@@ -17,14 +17,13 @@ app.use(express.static(publicPath)); // Middleware design.
 //Set up handlebars engine and view location
 app.set("views", viewsPath);
 app.set("view engine", "hbs");
-hbs.registerPartials(partialsPath);
+hbs.registerPartials(partialsPath); // (This method tells Handlebars where your partial templates are located so it can use them in your views.)
 
 // Routers
 app.get("/", (req, res) => {
   res.render("index", {
     title: "Weather",
     myName: "Daniel",
-    status: "Student",
     errorMsg: "Page not found",
   });
 });
@@ -34,7 +33,6 @@ app.get("/help", (req, res) => {
     title: "Help",
     description: " if You need any help, please throw any queation you want",
     myName: "Daniel",
-    status: "Student",
     errorMsg: "Help article not found",
   });
 });
@@ -63,7 +61,7 @@ app.get("/weather", (req, res) => {
             error: forecastError,
           });
         } else {
-          res.send({
+          res.json({
             forecast: forecastData,
             location,
             address,

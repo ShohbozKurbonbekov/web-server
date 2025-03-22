@@ -1,7 +1,7 @@
 {
   "name": "web-server",
   "version": "1.0.0",
-  "description": "this is a weather website",
+  "description": "this is a mini-fullstack weather website",
   "main": "app.js",
   "scripts": {
     "start:dev": "nodemon src/app.js",

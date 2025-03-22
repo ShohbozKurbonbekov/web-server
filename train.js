@@ -22,28 +22,6 @@
 // On Windows: 'users\john\docs\file.txt'
 // On macOS/Linux: 'users/john/docs/file.txt'
 
-// 🟩 Dynamic pages with templating
-/*Handlebars is a simple templating language that helps developers generate HTML dynamically. It is often used in web applications to separate logic from the UI by allowing you to insert dynamic content into templates.
-1️⃣.Logic-less Templates: Handlebars keeps templates clean by avoiding inline JavaScript.
-2️⃣.Expressions: Uses {{}} to insert values dynamically.
-3️⃣.Helpers: Custom functions to extend template functionality.
-4️⃣.Partials: Allows template reuse for better maintainability.*/
-
-// 🟩 ADVANCED TEMPLATING;
-// Partials allow you create a little template which is part of a bigger webpage. So we need to think about the parts of the webpage that we are gonna end  up reusing multiple pages in our site. these things would be "header" or "footer". with partials, it is gonna be so easy to create header and reuse it without needing to copy markup between all the pages in our site.  for that they are some steps to do.
-//1️⃣ - load and configure "hbs" for the first time. and create a partials "folder" inside  "template" folder
-//2️⃣ - then  we can tell "hbs" that we put our partials in this partials directory, and then we can actually add some stuff inside of there.
-//3️⃣ - we should customize our nodemon command, we can have no demon restart when our js files change and when hbs change, like "nodemon src/app.js -e js,hbs"
-
-const frequentElement = (arr) => {
-  const obj = {};
-  arr.forEach((num) => {
-    obj[num] = (obj[num] || 0) + 1;
-  });
-  console.log(obj);
-};
-frequentElement([1, 2, 2, 3, 3, 3, 4, 4]);
-
 //                   ✅ - VERSION CONTROL AND GIT
 // 1️⃣ -by defualt, git doesn't track files you add to your application,you are gonna have to run commands telling git that you wanna track specific files, if we were to add a couple of new files to our project, they would show up as untracked files. first thing we do is we move everything we wanna commit over to "staged changes", this is where we put things we wanna save. We would run a "git add ." command, this is gonna take one or more files from untracked files and bring it over "staged changes".  we use the commit command, it is gonna take all of the files in staged changes and it is going to bundle them up into a single "commit" and it is going to show up over there, each commit has a unique identifier. when we make a change to a file that git is already tracking that comes in under "unstaged changes". Then, we are gonna make "git add . " commit to bring things over to the "staged area" and then we can use commit command to take  all of this and create a brand new commit in "commit".
 
